@@ -8,7 +8,17 @@ function gameboard_field(field, sign) {
     this.field = field;
     this.taken = false;
     this.sign = sign;
-}
+    let self = this
+    this.field.onclick = function() {
+        console.log(self.sign)
+        if (self.taken === false) {
+            self.field.innerHTML = self.sign;
+            self.taken = true;
+            console.log('hi')
+        }
+    };
+    
+};
 //generate a random mark(for testing)
 let randomMark = function() {
     let num = Math.random();
@@ -17,21 +27,19 @@ let randomMark = function() {
     } else {
         return 'O'
     }
-}
-//push a gameboard file into the gameboard array
+};
+//push a gameboard field into the gameboard array
 for (let i = 0; i < marker_field.length; i++) {
-    gameboard.push(new gameboard_field(marker_field[i], randomMark()))
+    let newField = new gameboard_field(marker_field[i], randomMark());
+    gameboard.push(newField);
     
-}
-//overwrite innerHTML of a field
-function displayMarkers() {
-    for (let i = 0; i < gameboard.length; i++) {
-        if (gameboard[i].taken === false) {
-            gameboard[i].field.innerHTML = gameboard[i].sign
-            gameboard[i].taken = true
-        }
-    }
-}
-
-displayMarkers()
-console.log(gameboard)
+};
+// //overwrite innerHTML of a field (for testing)
+// function displayMarkers() {
+//     for (let i = 0; i < gameboard.length; i++) {
+//         if (gameboard[i].taken === false) {
+//             gameboard[i].field.innerHTML = gameboard[i].sign
+//             gameboard[i].taken = true
+//         }
+//     }
+// }
