@@ -7,6 +7,9 @@ html,
 body {
     width: 100vw;
     height: 100vh;
+    background: #FF6969;
+    box-shadow: inset 9px 9px 18px #d65858,
+                inset -9px -9px 18px #ff7a7a;
 }
 
 .container {
@@ -20,14 +23,24 @@ body {
 
 .game-board {
     display: grid;
+    justify-content: center;
+    gap: 1px;
     width: 50%;
     height: 50%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 98px);
+    grid-template-rows: repeat(3, 98px);
 }
 
 .marker-field {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border-radius: 10px; */
+    border: solid 2.5px #FFF5E0;
+    background: #141E46;
+    box-shadow: inset 9px 9px 18px #11193b,
+            inset -9px -9px 18px #172351;
+    color: white;
+    font-size: 2em;
+    font-weight: 700;
 }

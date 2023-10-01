@@ -23,7 +23,7 @@ const Gameboard = (() => {
         for (i=0;i<9;i++) {
             let newField = {
                 element: document.createElement("button"),
-                field: fieldFactory(false, '')
+                field: fieldFactory(false, 'empty')
             }
             newField.element.classList.add("marker-field");
             
@@ -52,8 +52,32 @@ const Gameboard = (() => {
         let result = fieldsArr.every(function (e) {
             return e.field.taken;
         });
+
+        let winningCondition = (() => {
+            let con = [
+                [fieldsArr[1].field.mark, fieldsArr[4].field.mark, fieldsArr[7].field.mark],
+                [fieldsArr[2].field.mark, fieldsArr[5].field.mark, fieldsArr[8].field.mark],
+                [fieldsArr[0].field.mark, fieldsArr[1].field.mark, fieldsArr[2].field.mark],
+                [fieldsArr[0].field.mark, fieldsArr[3].field.mark, fieldsArr[6].field.mark],
+                [fieldsArr[3].field.mark, fieldsArr[4].field.mark, fieldsArr[5].field.mark],
+                [fieldsArr[6].field.mark, fieldsArr[7].field.mark, fieldsArr[8].field.mark],
+                [fieldsArr[0].field.mark, fieldsArr[4].field.mark, fieldsArr[8].field.mark],
+                [fieldsArr[2].field.mark, fieldsArr[4].field.mark, fieldsArr[6].field.mark]
+            ];
+            for (let i = 0;i<con.length;i++) {
+                if (con[i][1] !== 'empty') {
+                    if((con[i][1] === con[i][0]) && (con[i][1] === con[i][2])) {
+                        return true;
+                    }
+                }
+            }
+        })()
+
+        if (winningCondition) {
+            alert('win')
+        }
         
-        if (result) {
+        if (result && winningCondition !== true) {
             alert("draw");
         }};
 
