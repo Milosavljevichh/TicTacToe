@@ -1,4 +1,7 @@
 
+const turnDisplayer = document.getElementById('turnDisplayer');
+const resultDisplayer = document.getElementById('resultDisplayer');
+
 const Gameboard = (() => {
 
     let gameboard = document.querySelector(".game-board");
@@ -17,7 +20,8 @@ const Gameboard = (() => {
                 currentPlayer.showMarker();
                 currentPlayer.turn = !currentPlayer.turn;
                 nextPlayer.turn = !nextPlayer.turn;
-                checkForDraw();
+                turnDisplayer.innerHTML = `Current player: ${nextPlayer.marker}`;
+                checkForResult(currentPlayer);
         };
 
         for (i=0;i<9;i++) {
@@ -47,7 +51,7 @@ const Gameboard = (() => {
     const player1 = playerFactory('X', true);
     const player2 = playerFactory('O', false);
 
-    const checkForDraw = () => {
+    const checkForResult = (winningPlayer) => {
 
         let result = fieldsArr.every(function (e) {
             return e.field.taken;
@@ -74,18 +78,27 @@ const Gameboard = (() => {
         })()
 
         if (winningCondition) {
-            alert('win')
+            resultDisplayer.innerHTML = `${winningPlayer.marker} is the winner!`;
+            stopPlayers();
         }
         
         if (result && winningCondition !== true) {
-            alert("draw");
+            resultDisplayer.innerHTML = `It's a draw!`
         }};
 
+    const stopPlayers = () => {
+        fieldsArr.forEach((e) => {
+            e.element.disabled = true
+        })
+    }
+
+    
     return {
         createGrid,
         playerFactory,
         fieldsArr,
-        checkForDraw
+        checkForResult,
+        stopPlayers
     }})();
 
 Gameboard.createGrid();
