@@ -31,7 +31,7 @@ body {
     justify-content: center;
     gap: 1px;
     width: 50%;
-    height: 50%;
+    height: fit-content;
     grid-template-columns: repeat(3, 98px);
     grid-template-rows: repeat(3, 98px);
 }
@@ -45,6 +45,12 @@ body {
     box-shadow: inset 9px 9px 18px #11193b,
             inset -9px -9px 18px #172351;
     border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.marker-field:hover {
+    transform: scale(0.95);
 }
 
 .displays,
@@ -59,4 +65,35 @@ body {
 .displays {
     font-size: 1.5em;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
+
+.resetBtn {
+    padding: 17px 40px;
+    border-radius: 50px;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    cursor: pointer;
+   }
+   
+   .resetBtn:hover {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    cursor: pointer;
+   }
+   
+   .resetBtn:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+   }

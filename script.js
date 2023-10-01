@@ -78,13 +78,37 @@ const Gameboard = (() => {
         })()
 
         if (winningCondition) {
-            resultDisplayer.innerHTML = `${winningPlayer.marker} is the winner!`;
-            stopPlayers();
+            gameStates.winDeclaration(winningPlayer)
         }
         
         if (result && winningCondition !== true) {
-            resultDisplayer.innerHTML = `It's a draw!`
+            gameStates.drawDeclaration()
         }};
+
+    const gameStates = {
+        winDeclaration: function(winningPlayer) {
+            resultDisplayer.style.color = '#0C356A';
+            turnDisplayer.innerHTML = '🎉';
+            resultDisplayer.innerHTML = `${winningPlayer.marker} is the winner!`;
+            stopPlayers();
+        },
+        drawDeclaration: function() {
+            resultDisplayer.style.color = '#0C356A';
+            turnDisplayer.innerHTML = '👍';
+            turnDisplayer.style.textShadow = "0px 2px 1px white"
+            resultDisplayer.innerHTML = `It's a draw!`;
+        },
+        resetGame: function() {
+            fieldsArr.length = 0;
+            let gameboardFields = document.querySelectorAll('.marker-field');
+            for (let i = 0;i<gameboardFields.length;i++) {
+                gameboardFields[i].remove()
+            }
+            resultDisplayer.innerHTML = `Who will win?`;
+            resultDisplayer.style.color = 'white'
+            createGrid();
+        }
+    }
 
     const stopPlayers = () => {
         fieldsArr.forEach((e) => {
@@ -98,7 +122,8 @@ const Gameboard = (() => {
         playerFactory,
         fieldsArr,
         checkForResult,
-        stopPlayers
+        stopPlayers,
+        gameStates
     }})();
 
 Gameboard.createGrid();
